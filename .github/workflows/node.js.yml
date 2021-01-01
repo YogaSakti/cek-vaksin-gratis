@@ -1,0 +1,36 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Cek Data
+
+on: 
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: "*/5 * * * *"
+  watch:
+    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Set up Nodejs
+      run: |
+        sudo apt-get install nodejs -y
+        npm install
+    - name: Create .env file
+      run: |
+        touch .env
+        echo NIK=${{ secrets.NIK }} >> .env
+        echo chatID=${{ secrets.CHATID }} >> .env
+        echo botToken=${{ secrets.BOTTOKEN }} >> .env
+    - name: eksekusi
+      run: |
+        npm start
+

@@ -1,0 +1,11 @@
+{
+  "name": "Vaccine-checker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "yogs",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1"
+  }
+}

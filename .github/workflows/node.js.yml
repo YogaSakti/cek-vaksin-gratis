@@ -7,13 +7,11 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 19 * * *"
   watch:
-    types: [started]
+    types: 
+      - started
 
 jobs:
   build:

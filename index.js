@@ -10,12 +10,10 @@ let secret = {
 async function sendResult(hasil) {
     try {
         let msg
-        if (hasil) {
-            msg = `Pemeriksaan status data dalam program vaksinasi _COVID-19 gratis_ dari pemerintah. \n\nNIK: ${secret.nik} \nHasil: *Selamat Anda terpilih sebagai calon penerima vaksinasi COVID-19 GRATIS.* `
-        } else {
+        hasil ?
+            msg = `Pemeriksaan status data dalam program vaksinasi _COVID-19 gratis_ dari pemerintah. \n\nNIK: ${secret.nik} \nHasil: *Selamat Anda terpilih sebagai calon penerima vaksinasi COVID-19 GRATIS.* ` :
             msg = `Pemeriksaan status data dalam program vaksinasi _COVID-19 gratis_ dari pemerintah. \n\nNIK: ${secret.nik} \nHasil: *Mohon maaf, Anda saat ini BELUM termasuk calon penerima vaksinasi COVID-19 GRATIS pada periode ini.*`
-        }
-        
+            
         let res = await fetch(`https://api.telegram.org/bot${secret.botToken}/sendMessage?chat_id=${secret.chatID}&parse_mode=markdown&text=${msg}`)
         let json = await res.json()
         console.log(json)
@@ -40,10 +38,9 @@ async function sendResult(hasil) {
             })
         })
         let json = await response.json()
-        if (json) {
-            if (json.code == 200 && json.success == true)
+        if (json.code == 200 && json.success == true) {
             console.log('Hasil: ' + json.data)
-                await sendResult(json.data)
+            await sendResult(json.data)
         }
     } catch (e) {
         console.error(e)

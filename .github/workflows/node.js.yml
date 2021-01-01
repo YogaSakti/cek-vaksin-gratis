@@ -5,9 +5,11 @@ name: Cek Data
 
 on: 
   push:
-    branches: [ master ]
+    branches:
+      - main
   pull_request:
-    branches: [ master ]
+    branches:
+      - main
   schedule:
     - cron: "*/5 * * * *"
   watch:

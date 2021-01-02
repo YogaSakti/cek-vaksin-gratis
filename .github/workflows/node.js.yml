@@ -9,9 +9,9 @@ on:
       - main
   schedule:
     - cron: "0 19 * * *"
-  watch:
-    types: 
-      - started
+  # watch:
+  #  types: 
+  #   - started
 
 jobs:
   build:
